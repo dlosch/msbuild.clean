@@ -1,8 +1,10 @@
-﻿namespace Msbuild.Clean;
+﻿using System.Runtime.InteropServices;
+
+namespace Msbuild.Clean;
 
 internal record class MsbuildLocation(string FullPath, MsbuildExecType ExecType, MsbuildLocationType MsbuildLocationType) {
     public string ExecName => ExecType switch {
-        MsbuildExecType.ExecTypeDllDotnet => $"dotnet.exe",
+        MsbuildExecType.ExecTypeDllDotnet => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "dotnet" : $"dotnet.exe",
         MsbuildExecType.ExecTypeExe => FullPath,
         _ => throw new InvalidOperationException()
     };
