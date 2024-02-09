@@ -46,6 +46,3 @@ Upside:
 
 ## msbuild WERfaults
 msbuild getproperty pukes when it encounters an error during evaluation.
-
-## code quality
-I have written better code:)
