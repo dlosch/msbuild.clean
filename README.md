@@ -25,6 +25,9 @@ Upside:
 - by default doesn't delete anything, just dumps statistics and rmdir /q /s ...
 - confirmation configurable
 
+## Sample
+msbuild.clean --root <rootDir> --depth 3 --parallel 24
+
 ## Options
 |switch||
 |---|---|
