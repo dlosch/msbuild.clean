@@ -16,6 +16,7 @@ internal record class ProcessorOptions(string RootPath = ".",
 
 internal record class ProcessorDirOptions(string RootPath,
     string Filter = "*.sln",
+    Predicate<string>? FileNameFilter = default,
     int Depth = 0,
     bool DryRun = true,
     string? MSBuildPath = default,
@@ -23,7 +24,13 @@ internal record class ProcessorDirOptions(string RootPath,
     LogLevel Log = LogLevel.Warning,
     int? Parallel = default,
     ProcessorMode Mode = ProcessorMode.Default)
-    : ProcessorOptions(RootPath, DryRun, MSBuildPath, Confirm, Log, Parallel, Mode);
+    : ProcessorOptions(RootPath, DryRun, MSBuildPath, Confirm, Log, Parallel, Mode) {
+    internal static bool FilterSupportedSlnFileFormats(string file) =>
+        // no support for slnx
+        file.EndsWith(".sln", StringComparison.OrdinalIgnoreCase) 
+        || file.EndsWith(".slnf", StringComparison.OrdinalIgnoreCase)
+        || file.EndsWith(".slnx", StringComparison.OrdinalIgnoreCase);
+}
 
 internal enum ConfirmLevel {
     Force, // none
@@ -343,7 +350,7 @@ internal static class ProcessorOptionsParser {
                 options = new ProcessorOptions(rootPath, dryRunFlag ?? !delete.Value, msbuildPath, confirmLevel ?? ConfirmLevel.Dir, logLevel ?? LogLevel.Info, parallel, flags);
             }
             else if (Directory.Exists(rootPath)) {
-                options = new ProcessorDirOptions(rootPath, "*.sln", depth ?? 2, dryRunFlag ?? !delete.Value, msbuildPath, confirmLevel ?? ConfirmLevel.Dir, logLevel ?? LogLevel.Info, parallel, flags);
+                options = new ProcessorDirOptions(rootPath, "*.sln?", ProcessorDirOptions.FilterSupportedSlnFileFormats, depth ?? 2, dryRunFlag ?? !delete.Value, msbuildPath, confirmLevel ?? ConfirmLevel.Dir, logLevel ?? LogLevel.Info, parallel, flags);
             }
         }
 

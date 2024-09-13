@@ -64,14 +64,17 @@ internal class Processor(ProcessorOptions Options, ILog? Log = default) {
     }
 
     private ParallelOptions _parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Options.Parallel ?? ProcessorOptions.DefaultParallelValue };
-    async ValueTask Enumerate<T>(IEnumerable<T> e, Func<T, ValueTask> f) {
+    async ValueTask Enumerate<T>(IEnumerable<T> e, Predicate<T>? fileNameFilter, Func<T, ValueTask> f) {
         if (Options.Mode.HasFlag(ProcessorMode.Parallel)) {
             await Parallel.ForEachAsync(e, _parallelOptions, async (item, cancellation) => {
-                await f(item);
+                if (fileNameFilter is null || fileNameFilter(item)) {
+                    await f(item);
+                }
             });
         }
         else {
             foreach (var item in e) {
+                if (fileNameFilter is { } && !fileNameFilter(item)) continue;
                 await f(item);
             }
         }
@@ -86,14 +89,14 @@ internal class Processor(ProcessorOptions Options, ILog? Log = default) {
 
             var fileSearcher = Directory.EnumerateFiles(pathRooted, dirOptions!.Filter, new EnumerationOptions {
                 IgnoreInaccessible = true,
-                MatchCasing = MatchCasing.PlatformDefault,
-                MatchType = MatchType.Simple,
+                MatchCasing = MatchCasing.CaseInsensitive,
+                MatchType = MatchType.Win32,
                 MaxRecursionDepth = dirOptions.Depth,
                 RecurseSubdirectories = true,
                 ReturnSpecialDirectories = false
             });
 
-            await Enumerate(fileSearcher, ProcessSln);
+            await Enumerate(fileSearcher, dirOptions.FileNameFilter, ProcessSln);
         }
     }
 
@@ -378,7 +381,7 @@ internal class Processor(ProcessorOptions Options, ILog? Log = default) {
 
             ValueTask Proc(ProjectInSolution proj) => ProcessProject(proj, Path.GetDirectoryName(slnPath));
 
-            await Enumerate(projEnumerator, Proc);
+            await Enumerate(projEnumerator, null, Proc);
         }
         catch (Exception xcptn) {
             Log?.Error(xcptn, $"Error processing sln {slnPath}:");
@@ -461,7 +464,7 @@ internal class Processor(ProcessorOptions Options, ILog? Log = default) {
                 await ProcessProjProperties(props, proj, cfg.ConfigurationName, parentPath);
             }
 
-            await Enumerate(cfgs, P);
+            await Enumerate(cfgs, null, P);
         }
 
         timer.Stop();
