@@ -102,6 +102,7 @@ internal class NetUtil {
         if (tfm == null) return false;
         if (tfm.StartsWith("net8", StringComparison.OrdinalIgnoreCase)) return true;
         if (tfm.StartsWith("net9", StringComparison.OrdinalIgnoreCase)) return true;
+        if (tfm.StartsWith("net10", StringComparison.OrdinalIgnoreCase)) return true;
         return false;
     }
 
@@ -129,6 +130,7 @@ internal class NetUtil {
 , "net7.0"
 , "net8.0"
 , "net9.0"
+, "net10.0"
 
 , "netstandard1.0"
 , "netstandard1.1"
