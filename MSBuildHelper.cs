@@ -5,6 +5,10 @@ namespace Msbuild.Clean;
 
 internal static partial class MSBuildHelper {
 
+    // if there is a global.json which references a sdk which is not installed, the msbuild invocation will fail, because msbuild always uses the global.json
+    // One could use "dotnet msbuild" instead, but that would require a different approach to the msbuild invocation
+    // dotnet msbuild: launched from the csproj dir: uses the global.json.
+    // dotnet msbuild: launched from a project above or unrelated to global.json: does not use the global.json.    
     public static async ValueTask<Output?> QueryProjectProperties(MsbuildLocation locations, string projectFilePath, string? configuration, string? platform, params string[] properties) {
         ValueTask<Output?> Deser(Stream json) => JsonSerializer.DeserializeAsync<Output>(json, JsonExt._sDefaults);
 
