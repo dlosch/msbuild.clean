@@ -26,7 +26,8 @@ Upside:
 - confirmation configurable
 
 Note:
-Always use -p/--parallel to speed up the process.
+- Always use -p/--parallel to speed up the process.
+- global.json ... doe to the consistent /s way msbuild, dotnet msbuild, and dotnet build handle global.json ... 
 
 ## Sample
 `msbuild.clean --root <rootDir> --depth 3 --parallel 24`
