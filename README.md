@@ -14,7 +14,7 @@ Yes, you can just use git/source control to nuke anything not under source contr
 Imagine you had a sln/csproj targeting net6.0, you have existing build output below /bin/Debug/net6.0, you switch to net8.0 ... happy days cleaning up the old build output.
 
 What this tool does
-- traverse directories looking for .sln
+- traverse directories looking for ~~.sln~~ .sln, .slnx, .slnf (the latter two preliminary)
 - process all configurations from the .sln
 - invokes msbuild to evaluate the build output related properties from the project file per configuration (which is why this is so s-s-s-slow)
 - enables you to delete only non-current build output (TagetFramework no longer in proj file)
