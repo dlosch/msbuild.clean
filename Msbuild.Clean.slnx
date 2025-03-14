@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../msbuild.clean.tests/msbuild.clean.tests.csproj" />
+  <Project Path="Msbuild.Clean.csproj" />
+</Solution>
