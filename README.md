@@ -1,6 +1,6 @@
 ﻿# msbuild.clean
 
-This is a tool to clean build output folders for (especially .net) MSBuild projects. It's also lame and quite s-s-s-slow.
+This is a tool to clean build output folders for (especially .net) MSBuild projects. It's also lame (at least a iota) and quite s-s-s-slow ;)
 
 Yes, you can use **dotnet clean** or **msbuild /t:clean** to clean build output from your solutions ... however, these tools ... well these
 - don't clean old build targets (after migrating from net6.0 to net8.0, net6.0 output doesn't get cleaned)
@@ -24,6 +24,9 @@ What this tool does
 Upside:
 - by default doesn't delete anything, just dumps statistics and rmdir /q /s ...
 - confirmation configurable
+
+Note:
+Always use -p/--parallel to speed up the process.
 
 ## Sample
 `msbuild.clean --root <rootDir> --depth 3 --parallel 24`
