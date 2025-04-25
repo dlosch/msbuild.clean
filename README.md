@@ -49,7 +49,7 @@ Note:
   - **-npm, --non-parallel**: process every sln and projs sequentially. p!=np. Note-to-self: alias with unparallel for rock climbing enthusiasts.
   - **-p, --parallel**: processes sln, projs, and configurations slightly parallel (if it's slow, that's fine. If it's extremely slow, get a new machine)
   - **--depth**: if root dir is directory, the depth to which the tool scans for .sln
-  - **<path>**: path to sln or path to root dir can also be specified as last argument. If missing, current directory used
+  - **\<path\>**: path to sln or path to root dir can also be specified as last argument. If missing, current directory used
 
 ## msbuild WERfaults
 msbuild getproperty pukes when it encounters an error during evaluation.
