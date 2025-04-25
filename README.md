@@ -44,11 +44,11 @@ Note:
 |--force|every tool needs an option --force|
 |--delete-empty-directories|delete directory even if no files/subdirectories.|
 |--delete-files|delete files instead of directories|
-|--non-current --noncurrent|delete only build output which is not targeting the current TargetFramework/TargetFrameworks from the csproj. Uses a list of tfms and the basic out dir structure \bin\<config>\<tfm>.|
+|--non-current, --noncurrent|delete only build output which is not targeting the current TargetFramework/TargetFrameworks from the csproj. Uses a list of tfms and the basic out dir structure \bin\<config>\<tfm>.|
 |--obj|[DEFAULT] also clean BaseIntermediateOutputPath|
 |--msbuild|explicit path to MSbuild.exe or MSbuild.dll. By default, the tool tries to guess the correct MSBuild location, preferring Visual Studio installations|
 |--root|root path or path to .sln|
-|-np|--non-parallal|process every sln and projs sequentially|
+|-np|--non-parallel|process every sln and projs sequentially. p!=np|
 |-p|--parallel|processes sln, projs, and configurations slightly parallel (if it's slow, that's fine. If it's extremely slow, get a new machine)|
 |--depth|if root dir is directory, the depth to which the tool scans for .sln|
 |<path>|path to sln or path to root dir can also be specified as last argument. If missing, current directory used|
