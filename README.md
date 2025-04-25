@@ -35,7 +35,7 @@ Note:
 `msbuild.clean --root <rootDir> --depth 3 --parallel 24`
 
 ## Options
-|command line switch|description|
+| <span style="white-space: nowrap;">command line switch</span>|description|
 |---|---|
 |-v, --verbosity, --log|LogLevel (Debug,Verbose,Info,[Warning],Error)|
 |--confirm|ConfirmLevel|
