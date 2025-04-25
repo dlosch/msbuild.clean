@@ -35,7 +35,7 @@ Note:
 `msbuild.clean --root <rootDir> --depth 3 --parallel 24`
 
 ## Options
-|switch||
+|command line switch|description|
 |---|---|
 |-v, --verbosity, --log|LogLevel (Debug,Verbose,Info,[Warning],Error)|
 |--confirm|ConfirmLevel|
@@ -44,7 +44,7 @@ Note:
 |--force|every tool needs an option --force|
 |--delete-empty-directories|delete directory even if no files/subdirectories.|
 |--delete-files|delete files instead of directories|
-|--non-current&nbsp;--noncurrent|delete only build output which is not targeting the current TargetFramework/TargetFrameworks from the csproj. Uses a list of tfms and the basic out dir structure \bin\<config>\<tfm>.|
+|--non-current --noncurrent|delete only build output which is not targeting the current TargetFramework/TargetFrameworks from the csproj. Uses a list of tfms and the basic out dir structure \bin\<config>\<tfm>.|
 |--obj|[DEFAULT] also clean BaseIntermediateOutputPath|
 |--msbuild|explicit path to MSbuild.exe or MSbuild.dll. By default, the tool tries to guess the correct MSBuild location, preferring Visual Studio installations|
 |--root|root path or path to .sln|
