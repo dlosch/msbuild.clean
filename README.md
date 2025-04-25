@@ -35,8 +35,8 @@ Note:
 `msbuild.clean --root <rootDir> --depth 3 --parallel 24`
 
 ## Options
-| <span style="white-space: nowrap;">command line switch</span>|description|
-|---|---|
+|command line option|description|
+|------------------------------|---|
 |-v, --verbosity, --log|LogLevel (Debug,Verbose,Info,[Warning],Error)|
 |--confirm|ConfirmLevel|
 |--dry-run|[DEFAULT] do not delete, just dump stats and a list of folders to delete|
